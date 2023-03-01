@@ -8,6 +8,7 @@ import org.lessons.java.pizzeria.repository.PizzaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -54,5 +55,11 @@ public class IndexApiController {
 	@DeleteMapping("{id}")
 	public void delete(@PathVariable("id") Integer id) {
 		pizzaRepo.deleteById(id);
+	}
+
+	@GetMapping("/testTLS")
+	public String testTLS(Authentication auth) {
+		System.out.println("Utente loggato:" + auth.getName());
+		return "testTLS";
 	}
 }
