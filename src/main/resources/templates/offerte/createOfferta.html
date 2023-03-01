@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+ <html xmlns:th="http://www.thymeleaf.org">
+ <head>
+	 <div th:replace="~{fragments :: head}"></div>
+	 <title>Crea offerta</title>
+ </head>
+ <body>
+ 
+ <div th:replace="~{fragments :: navbar}"></div>
+ 
+ <div class="container">
+ 	<h1>Crea nuova offerta</h1>
+ 	<div class="row">
+ 		<div class="col">
+ 			<form 
+ 				id="offerta-form"
+ 				th:object="${offerta}"
+ 				th:action="@{/offerte/create}"
+ 				method="post">
+ 				
+ 				<input type="hidden" th:field="${offerta.pizza}">
+ 				
+ 				<label for="titolo" class="form-label">Titolo</label>
+ 				<input class="form-control mb-3" type="text" id="titolo" th:field="*{titolo}" th:errorClass="is-invalid">
+ 				<div th:if="${#fields.hasErrors('titolo')}" class="invalid-feedback">
+ 					<ul>
+ 						<li th:each="err : ${#fields.errors('titolo')}" th:text="${err}"></li>
+ 					</ul>
+ 				</div>
+ 				
+ 				<label for="inizio" class="form-label">Data inizio offerta</label>
+ 				<input class="form-control mb-3" type="date" id="inizio" th:field="*{inizio}" th:errorClass="is-invalid">
+ 				<div th:if="${#fields.hasErrors('inizio')}" class="invalid-feedback">
+ 					<ul>
+ 						<li th:each="err : ${#fields.errors('inizio')}" th:text="${err}"></li>
+ 					</ul>
+ 				</div>
+ 				
+ 				<label for="fine" class="form-label">Data fine offerta</label>
+ 				<input class="form-control mb-3" type="date" id="fine" th:field="*{fine}" th:errorClass="is-invalid">
+ 				<div th:if="${#fields.hasErrors('fine')}" class="invalid-feedback">
+ 					<ul>
+ 						<li th:each="err : ${#fields.errors('fine')}" th:text="${err}"></li>
+ 					</ul>
+ 				</div>
+ 				
+ 				<button type="submit" class="btn btn-primary">Salva</button>
+ 			</form>
+ 		</div>
+ 	</div>
+ </div>
+
+ </body>
+ </html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+ <html xmlns:th="http://www.thymeleaf.org">
+ <head>
+	 <div th:replace="~{fragments :: head}"></div>
+	 <title>pizze</title>
+ </head>
+ <body>
+ 
+ <div th:replace="~{fragments :: navbar}"></div>
+ 
+ <div class="container">
+ 
+ 	<h1 class="text-center mt-4">Elenco Pizze</h1>
+ 	
+ 	<div th:replace="~{fragments :: search}"></div>
+ 	
+ 	<div class="row">
+ 		<div class="col">
+ 			<table class="table" th:if="${!result.isEmpty()}">
+			  <thead>
+			    <tr>
+			      <th scope="col">Nome</th>
+			      <th scope="col">Descrizione</th>
+			      <th scope="col">Foto</th>
+			      <th scope="col">Prezzo</th>
+			    </tr>
+			  </thead>
+			  <tbody>
+			    <tr th:each="pizza : ${result}">
+			      <td th:text="${pizza.getName()}"></td>
+			      <td th:text="${pizza.getDescription()}"></td>
+			      <td><img class="img-thumbnail" width="150" height="150" th:src="${pizza.getImgUrl}"></img></td>
+			      <td th:text="${pizza.getPrice}"></td>
+			      
+			      <td><a class="btn btn-primary" th:href="@{/pizze/{id}(id=${pizza.getId()})}"><i class="fa-solid fa-magnifying-glass"></i></a></td>
+			      <td><a class="btn btn-primary" th:href="@{/pizze/edit/{id}(id=${pizza.getId()})}"><i class="fa-regular fa-pen-to-square"></i></a></td>
+			      <td>
+			      	<form action="#" th:action="@{/pizze/delete/{id} (id=${pizza.getId()})}" method="post">
+			      		<button class="btn btn-primary" type="submit" id="submitButton"><i class="fa-solid fa-trash-can"></i></button>
+			      	</form> 
+			      </td>
+			      
+			    </tr>
+			  </tbody>
+			</table>
+			<div th:if="${result.isEmpty()}">Nessuna pizza</div>
+ 		</div>
+ 	</div>
+ </div>
+
+ </body>
+ </html>

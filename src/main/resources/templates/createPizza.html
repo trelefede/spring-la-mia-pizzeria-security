@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+ <html xmlns:th="http://www.thymeleaf.org">
+ <head>
+	 <div th:replace="~{fragments :: head}"></div>
+	 <title>Crea pizza</title>
+ </head>
+ <body>
+ 
+ <div th:replace="~{fragments :: navbar}"></div>
+ 
+ <div class="container">
+ 	<h1>Crea nuova pizza</h1>
+ 	<div class="row">
+ 		<div class="col">
+ 			<form 
+ 				id="pizza-form"
+ 				th:object="${pizza}"
+ 				th:action="@{/pizze/create}"
+ 				method="post">
+ 				
+ 				<label for="name" class="form-label">Nome</label>
+ 				<input class="form-control mb-3" type="text" id="name" th:field="*{name}" th:errorClass="is-invalid">
+ 				<div th:if="${#fields.hasErrors('name')}" class="invalid-feedback">
+ 					<ul>
+ 						<li th:each="err : ${#fields.errors('name')}" th:text="${err}"></li>
+ 					</ul>
+ 				</div>
+ 				
+ 				<label for="image" class="form-label">Url immagine</label>
+ 				<input class="form-control mb-3" type="text" id="image" th:field="*{imgUrl}" th:errorClass="is-invalid">
+ 				<div th:if="${#fields.hasErrors('imgUrl')}" class="invalid-feedback">
+ 					<ul>
+ 						<li th:each="err : ${#fields.errors('imgUrl')}" th:text="${err}"></li>
+ 					</ul>
+ 				</div>
+ 				
+ 				<label for="description" class="form-label">Descrizione</label>
+ 				<input class="form-control mb-3" type="text" id="description" th:field="*{description}" th:errorClass="is-invalid">
+ 				<div th:if="${#fields.hasErrors('description')}" class="invalid-feedback">
+ 					<ul>
+ 						<li th:each="err : ${#fields.errors('description')}" th:text="${err}"></li>
+ 					</ul>
+ 				</div>
+ 				
+ 				<label for="price" class="form-label">Prezzo</label>
+ 				<input class="form-control mb-3" type="text" id="price" th:field="*{price}" th:errorClass="is-invalid">
+ 				<div th:if="${#fields.hasErrors('price')}" class="invalid-feedback">
+ 					<ul>
+ 						<li th:each="err : ${#fields.errors('price')}" th:text="${err}"></li>
+ 					</ul>
+ 				</div>
+ 				
+ 				<div class="form-check" th:each="ing : ${ingredienti}">
+ 					<label class="form-check-label" th:for="${ing.name}" th:text="${ing.name}"></label>
+					<input class="form-check-input" type="checkbox" th:value="${ing.id}" th:id="${ing.name}" th:field="*{ingredienti}">
+				</div>
+ 				
+ 				<button type="submit" class="btn btn-primary">Salva</button>
+ 			</form>
+ 		</div>
+ 	</div>
+ </div>
+
+ </body>
+ </html>

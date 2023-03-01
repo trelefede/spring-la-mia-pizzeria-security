@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+ <html xmlns:th="http://www.thymeleaf.org">
+ <head>
+	 <div th:replace="~{fragments :: head}"></div>
+	 <title>Dettaglio Pizza</title>
+ </head>
+ <body>
+ 
+ <div th:replace="~{fragments :: navbar}"></div>
+ 
+ <div class="container">
+ 	<h1>Dettaglio Pizza</h1>
+ 	<div class="row">
+ 		<div class="col-4">
+ 			<h3 th:text="${pizza.getName()}"></h3>
+ 			<img th:alt="${pizza.getName()}" width="150" height="150" th:src="${pizza.getImgUrl()}">
+ 			<p th:text="${pizza.getDescription()}"></p>
+ 			<p th:text="${pizza.getPrice()}"></p>
+ 		</div>
+ 		<div class="col-4">
+ 			<h5>Ingredienti</h5>
+ 			<p th:each="ing : ${pizza.ingredienti}">
+ 				<span th:text="${ing.name}"></span>
+ 				<span th:text="${ing.price}"></span>
+ 			</p>
+ 		</div>
+ 		<div class="col-4">
+ 			<h5>Offerte speciali</h5>
+ 			<p th:each="offerta : ${pizza.offerte}">
+ 				<span th:text="${offerta.titolo}"></span>
+ 			</p>
+ 			<a class="btn btn-primary" th:href="@{/offerte/create?pizzaId={id}(id=${pizza.getId()})}">Nuova offerta</a>
+ 		</div>
+ 	</div>
+ 	<a class="btn btn-primary" th:href="@{/pizze/edit/{id}(id=${pizza.getId()})}"><i class="fa-regular fa-pen-to-square"></i></a>
+ </div>
+
+ </body>
+ </html>

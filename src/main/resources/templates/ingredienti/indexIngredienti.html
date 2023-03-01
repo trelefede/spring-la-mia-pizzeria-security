@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+ <html xmlns:th="http://www.thymeleaf.org">
+<head>
+	 <div th:replace="~{fragments :: head}"></div>
+	 <title>Ingredienti</title>
+ </head>
+ <body>
+ 
+ <div th:replace="~{fragments :: navbar}"></div>
+ 
+ <div class="container">
+ 
+ 	<h1 class="text-center mt-4">Elenco Ingredienti</h1>
+ 	
+ 	<div class="row">
+ 		<div class="col">
+ 			<table class="table" th:if="${!ingredienti.isEmpty()}">
+			  <thead>
+			    <tr>
+			      <th scope="col">Nome</th>
+			      <th scope="col">Prezzo</th>
+			    </tr>
+			  </thead>
+			  <tbody>
+			    <tr th:each="ing : ${ingredienti}">
+			      <td th:text="${ing.name}"></td>
+			      <td th:text="${ing.price}"></td>
+			      
+			     
+			      
+			    </tr>
+			  </tbody>
+			</table>
+			<div th:if="${ingredienti.isEmpty()}">Nessun ingrediente</div>
+			<a class="btn btn-primary" th:href="@{/ingredienti/create}">Aggiungi ingrediente</a>
+ 		</div>
+ 	</div>
+ </div>
+ </body>
+ </html>
