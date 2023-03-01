@@ -7,6 +7,7 @@ import org.lessons.java.pizzeria.model.Pizza;
 import org.lessons.java.pizzeria.repository.IngredienteRepository;
 import org.lessons.java.pizzeria.repository.PizzaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -96,5 +97,11 @@ public class IndexController {
 	public String deletePizza(@PathVariable("id") Integer id) {
 		pizze.deleteById(id);
 		return "redirect:/pizze";
+	}
+
+	@GetMapping("/testTLS")
+	public String testTLS(Authentication auth) {
+		System.out.println("Utente loggato:" + auth.getName());
+		return "testTLS";
 	}
 }

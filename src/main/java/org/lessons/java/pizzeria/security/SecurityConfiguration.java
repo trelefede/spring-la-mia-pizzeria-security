@@ -14,11 +14,10 @@ public class SecurityConfiguration {
 
 	@Bean
 	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-		http.authorizeHttpRequests().requestMatchers("/api/pizze/create", "/api/pizze/edit/**").hasAuthority("ADMIN")
-				.requestMatchers(HttpMethod.POST, "/api/pizze/**").hasAuthority("ADMIN")
-				.requestMatchers("/api/pizze", "/api/pizze/**").hasAnyAuthority("USER", "ADMIN").requestMatchers("/**")
-				.permitAll().and().formLogin().and().logout().and().exceptionHandling()
-				.accessDeniedPage("/access-denied.html");
+		http.authorizeHttpRequests().requestMatchers("/pizze/create", "/pizze/edit/**").hasAuthority("ADMIN")
+				.requestMatchers(HttpMethod.POST, "/pizze/**").hasAuthority("ADMIN").requestMatchers("/pizze/**")
+				.hasAnyAuthority("USER", "ADMIN").requestMatchers("/**").permitAll().and().formLogin().and().logout()
+				.and().exceptionHandling().accessDeniedPage("/access-denied.html");
 
 		return http.build();
 	}
@@ -40,7 +39,7 @@ public class SecurityConfiguration {
 		authProvider.setUserDetailsService(userDetailsService());
 		authProvider.setPasswordEncoder(passwordEncoder());
 
-		System.out.println(passwordEncoder().encode("admin"));
+		System.out.println(passwordEncoder().encode("cazzo"));
 
 		return authProvider;
 	}
